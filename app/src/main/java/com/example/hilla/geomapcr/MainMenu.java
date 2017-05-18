@@ -1,7 +1,9 @@
 package com.example.hilla.geomapcr;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
@@ -10,11 +12,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-public class MainMenu extends AppCompatActivity {
+
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static android.os.Build.VERSION_CODES.M;
+
+public class MainMenu extends AppCompatActivity  {
+
+    private static final int REQUEST_PERMISSION = 0; // Id para los permisos
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        populateAutoComplete();
         setContentView(R.layout.activity_main_menu);
         Mensaje("Bienvenidos a GeoMapCR");
         ReproducirAudio();
@@ -33,6 +42,25 @@ public class MainMenu extends AppCompatActivity {
     }//fin oncreate
     MediaPlayer misonido;
 
+
+    private void populateAutoComplete() {
+        if (!mayRequestPermissions()) {
+            return;
+        }
+    }
+
+    private boolean mayRequestPermissions() { // Pedir permiso ubicación
+        if (Build.VERSION.SDK_INT < M) {
+            return true;
+        }
+        if (checkSelfPermission(ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        }
+     else{
+            requestPermissions(new String[]{ACCESS_FINE_LOCATION}, REQUEST_PERMISSION);
+        }
+        return false;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
