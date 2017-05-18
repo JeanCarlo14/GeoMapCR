@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_ayuda"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.hilla.geomapcr.Ayuda">
+
+	<TextView
+		android:id="@+id/textView"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentStart="true"
+		android:layout_alignParentTop="true"
+		android:layout_marginTop="54dp"
+		android:text="El juego GeoMapCR, consta de localizar en el mapa de
+Costa Rica algunas partes de la geografía de nuestro
+país; las cuales estan divididas en categorias como
+lo son las llanuras, cordilleras, ríos, volvanes y
+Parques Nacionales.
+El juego contiene un menu principal, el cual nos
+permite realizar varias actividades dependiendo del
+botón que se presiona.
+Para empezar a jugar, se debe presionar el boton
+jugar, luego seleccionar una de las categoría antes
+mencionadas.
+El botón test nos llevara a un Test con algunas preguntas
+sobre cualquier categoría.
+Al presionar el botón mapa, este nos enseñara el mapa
+de Costa Rica.
+El botón relax nos permite responder las preguntas
+sin ningun tipo de prueba.
+"
+		android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+</RelativeLayout>
