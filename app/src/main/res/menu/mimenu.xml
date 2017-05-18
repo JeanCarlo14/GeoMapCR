@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Ríos"
+        android:id="@+id/item1"
+        android:icon="@drawable/rio" />
+
+    <item android:title="Cordilleras y Cerros"
+        android:id="@+id/item2"
+        android:icon="@drawable/cordillera"/>
+    <item
+        android:title="Volcanes"
+        android:id="@+id/item3"
+        android:icon="@drawable/volcan"/>
+    <item
+        android:title="Llanuras"
+        android:id="@+id/item4"
+        android:icon="@drawable/llanura"/>
+    <item
+        android:title="Parques Nacionales"
+        android:id="@+id/item5"
+        android:icon="@drawable/parque"/>
+</menu>
+
+
