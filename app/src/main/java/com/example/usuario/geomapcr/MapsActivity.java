@@ -1,4 +1,4 @@
-package com.example.hilla.geomapcr;
+package com.example.usuario.geomapcr;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -94,7 +94,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng gimnasio = new LatLng(lat, lon);
         switch (tipo) {
             case 1 :    mMap.addMarker(new MarkerOptions().position(gimnasio).title(nombre).icon(BitmapDescriptorFactory.fromResource(R.drawable.volcanes)));
-           break;
+                break;
             case 2 :    mMap.addMarker(new MarkerOptions().position(gimnasio).title(nombre).icon(BitmapDescriptorFactory.fromResource(R.drawable.ullanura)));
                 break;
             case 3 :    mMap.addMarker(new MarkerOptions().position(gimnasio).title(nombre).icon(BitmapDescriptorFactory.fromResource(R.drawable.urio)));
@@ -214,7 +214,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             else{
                 json = jParser.makeHttpRequest(url_all_ubicacion,"GET",params);
             }
-           try {
+            try {
                 // Checking for SUCCESS TAG
                 success = json.getInt("success");
 

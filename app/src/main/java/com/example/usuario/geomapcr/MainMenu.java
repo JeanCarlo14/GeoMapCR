@@ -1,5 +1,4 @@
-package com.example.hilla.geomapcr;
-
+package com.example.usuario.geomapcr;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
@@ -56,7 +55,7 @@ public class MainMenu extends AppCompatActivity  {
         if (checkSelfPermission(ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             return true;
         }
-     else{
+        else{
             requestPermissions(new String[]{ACCESS_FINE_LOCATION}, REQUEST_PERMISSION);
         }
         return false;

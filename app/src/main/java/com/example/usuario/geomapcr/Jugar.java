@@ -1,5 +1,4 @@
-package com.example.hilla.geomapcr;
-
+package com.example.usuario.geomapcr;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -29,7 +28,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.hilla.geomapcr.R.id.btn_siguiente;
+import static com.example.usuario.geomapcr.R.id.btn_siguiente;
 
 public class Jugar extends AppCompatActivity {
 
@@ -110,8 +109,8 @@ public class Jugar extends AppCompatActivity {
                             handler.postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                   //sleep....
-                                 
+                                    //sleep....
+
                                     Intent intento1 = new Intent(getApplicationContext(), Resultados.class);
                                     intento1.putExtra("puntosA", puntosA);
                                     intento1.putExtra("puntosB", puntosB);
@@ -123,18 +122,18 @@ public class Jugar extends AppCompatActivity {
 
                         }
                         cant++;
-                       if(correcta.equals(opcion)){
+                        if(correcta.equals(opcion)){
                             esCorrecta();
 
-                           puntosA++;
+                            puntosA++;
                             //  esCorrecta();
                         }
                         else {
-                           esIncorrecta();
+                            esIncorrecta();
 
                             puntosB++;
 
-                       }
+                        }
 
 
                         Handler handler = new Handler();
@@ -153,8 +152,8 @@ public class Jugar extends AppCompatActivity {
 
                                     cargarDatos();
 
-                               }
-                           }
+                                }
+                            }
                         }, 2000);
                         Button Mi_button = (Button) findViewById(R.id.btn_siguiente);
                         Mi_button.setEnabled(false);
@@ -168,7 +167,7 @@ public class Jugar extends AppCompatActivity {
                         if(con == preg_rand.length-1){
                             //btn_atras_Siguiente(true,false);
                             if(cant+1>preg_rand.length-1)
-                            Mi_button.setText("Finalizar");
+                                Mi_button.setText("Finalizar");
                             else
                                 Mi_button.setText("Siguiente");
                         }
@@ -233,11 +232,11 @@ public class Jugar extends AppCompatActivity {
                         // Getting Array of preguntas
                         preguntas = json.getJSONArray("preguntas");
 
-                            if (preguntas.length() < 7 || tipo== 7) {
-                                preg_rand = new int[preguntas.length()];
-                            } else {
-                                preg_rand = new int[7];
-                            }
+                        if (preguntas.length() < 7 || tipo== 7) {
+                            preg_rand = new int[preguntas.length()];
+                        } else {
+                            preg_rand = new int[7];
+                        }
 
                     } catch (JSONException e1) {
                         e1.printStackTrace();
@@ -264,7 +263,7 @@ public class Jugar extends AppCompatActivity {
                 public void run() {
 
                     if (success == 1) {
-                       // Mensaje("Entro en success");
+                        // Mensaje("Entro en success");
 
                         preRandom();
                         cargarDatos();
@@ -288,10 +287,10 @@ public class Jugar extends AppCompatActivity {
     public void Mensaje2(String msg){Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();};
 
     private int preRandom(){
-       int rnd= (int) (Math.random() * preguntas.length());
+        int rnd= (int) (Math.random() * preguntas.length());
         //Mensaje2("Valor random "+rnd);
-       while(existe_numPre(rnd)){
-           rnd= (int) (Math.random() * preguntas.length());
+        while(existe_numPre(rnd)){
+            rnd= (int) (Math.random() * preguntas.length());
         }
         preg_rand[pos]=rnd;
         pos++;
@@ -471,28 +470,28 @@ public class Jugar extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-       // Mensaje2("Pase por OnStart");
+        // Mensaje2("Pase por OnStart");
     };
     @Override
     protected void onRestart(){
         super.onRestart();
-      //  Mensaje2("Pase por onRestart");
+        //  Mensaje2("Pase por onRestart");
     };
     @Override
     protected void onResume(){
         super.onResume();
-       // Mensaje2("Pase por onResume");
+        // Mensaje2("Pase por onResume");
     };
     @Override
     protected void onPause(){
         super.onPause();
-      //  Mensaje2("Pase por onPause");
+        //  Mensaje2("Pase por onPause");
         PararReproducirAudio();
     };
     @Override
     protected void onStop(){
         super.onStop();
-       // Mensaje2("Pase por onStop");
+        // Mensaje2("Pase por onStop");
     };
     //estoy tratado e
 
