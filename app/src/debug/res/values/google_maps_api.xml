@@ -4,7 +4,7 @@
 
     To get one, follow this link, follow the directions and press "Create" at the end:
 
-    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=B4:75:90:1A:CB:D1:7F:BC:EC:8F:2F:20:06:52:47:50:20:72:AE:CD%3Bcom.example.hilla.geomapcr
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=B4:75:90:1A:CB:D1:7F:BC:EC:8F:2F:20:06:52:47:50:20:72:AE:CD%3Bcom.example.usuario.geomapcr
 
     You can also add your credentials to an existing key, using these values:
 
@@ -21,6 +21,6 @@
     string in this file.
     -->
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
-         AIzaSyChOrTrukDBAmgTxHfhq0wOEN-8rWdl44o
+        AIzaSyC1yhGm8rS8Vd0gQCEDY7FPYhJ2PFkUPKs
     </string>
 </resources>

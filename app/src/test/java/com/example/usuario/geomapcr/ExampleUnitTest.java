@@ -1,4 +1,4 @@
-package com.example.hilla.geomapcr;
+package com.example.usuario.geomapcr;
 
 import org.junit.Test;
 

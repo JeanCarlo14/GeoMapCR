@@ -1,4 +1,4 @@
-package com.example.hilla.geomapcr;
+package com.example.usuario.geomapcr;
 
 /**
  * Created by ABC on 27-06-2016.
