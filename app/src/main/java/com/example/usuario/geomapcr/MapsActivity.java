@@ -3,6 +3,7 @@ package com.example.usuario.geomapcr;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -13,6 +14,12 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
+import android.view.ContextMenu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -61,7 +68,93 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
         new LoadAllProducts().execute(); // ver en que momento usar
 
+        OnclickDelButton(R.id.button1);
+        OnclickDelButton(R.id.button2);
+        OnclickDelButton(R.id.button3);
+        OnclickDelButton(R.id.button4);
+        /*OnclickDelButton(R.id.button5);*/
+
+        Button Mi_button = (Button) findViewById(R.id.button3);
+        registerForContextMenu(Mi_button);
+
     }
+
+    public void OnclickDelButton(int ref) {
+
+        // Ejemplo  OnclickDelButton(R.id.MiButton);
+        // 1 Doy referencia al Button
+        View view =findViewById(ref);
+        Button miButton = (Button) view;
+        //  final String msg = miButton.getText().toString();
+        // 2.  Programar el evento onclick
+        miButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                // if(msg.equals("Texto")){Mensaje("Texto en el botón ");};
+                switch (v.getId()) {
+
+                    case R.id.button1:
+                        // acercar
+                        mMap.animateCamera(CameraUpdateFactory.zoomIn());
+                        break;
+
+                    case R.id.button2:
+                        // alejar
+                        mMap.animateCamera(CameraUpdateFactory.zoomOut());
+                        break;
+
+                    case R.id.button3:
+                        openContextMenu(findViewById(R.id.button3));
+                        break;
+
+                    case R.id.button4:
+                        miUbicacion();
+                        break;
+/*
+                    case R.id.button5:
+                        Mensaje("Implementar Button5");
+
+                        break;*/
+                    default:break; }// fin de casos
+            }// fin del onclick
+        });
+    }// fin de OnclickDelButton
+
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        if(v.getId()==R.id.button3) {
+            menu.setHeaderTitle("Tipos de mapa");
+            menu.add(0, 1, 0, "Satelital");
+            menu.add(0, 2, 0, "Terreno");
+            menu.add(0, 3, 0, "Hibrido");
+            menu.add(0, 4, 0, "Normal");
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        int opcionseleccionada = item.getItemId();
+        switch (item.getItemId()) {
+            case 1: mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE); break;
+            case 2: mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN); break;
+            case 3: mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID); break;
+            case 4: mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL); break;
+            default:  Mensaje("No clasificado"); break;
+        }
+        return true;
+    }
+
+
+
+
+
+    public void Mensaje(String msg){
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();};
+
+
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -83,6 +176,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         *  }
         *
         * */
+
     }
 
     public void locGim(double lat, double lon, String nombre, int tipo){
@@ -91,17 +185,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Rios			  3
         Cordilleras		  4
         Parque Nacional   5*/
-        LatLng gimnasio = new LatLng(lat, lon);
+        LatLng posicion = new LatLng(lat, lon);
         switch (tipo) {
-            case 1 :    mMap.addMarker(new MarkerOptions().position(gimnasio).title(nombre).icon(BitmapDescriptorFactory.fromResource(R.drawable.volcanes)));
+            case 1 :    mMap.addMarker(new MarkerOptions().position(posicion).title(nombre).snippet(""+posicion).icon(BitmapDescriptorFactory.fromResource(R.drawable.volcanes)));
                 break;
-            case 2 :    mMap.addMarker(new MarkerOptions().position(gimnasio).title(nombre).icon(BitmapDescriptorFactory.fromResource(R.drawable.ullanura)));
+            case 2 :    mMap.addMarker(new MarkerOptions().position(posicion).title(nombre).snippet(""+posicion).icon(BitmapDescriptorFactory.fromResource(R.drawable.ullanura)));
                 break;
-            case 3 :    mMap.addMarker(new MarkerOptions().position(gimnasio).title(nombre).icon(BitmapDescriptorFactory.fromResource(R.drawable.urio)));
+            case 3 :    mMap.addMarker(new MarkerOptions().position(posicion).title(nombre).snippet(""+posicion).icon(BitmapDescriptorFactory.fromResource(R.drawable.urio)));
                 break;
-            case 4 :    mMap.addMarker(new MarkerOptions().position(gimnasio).title(nombre).icon(BitmapDescriptorFactory.fromResource(R.drawable.ucordillera)));
+            case 4 :    mMap.addMarker(new MarkerOptions().position(posicion).title(nombre).snippet(""+posicion).icon(BitmapDescriptorFactory.fromResource(R.drawable.ucordillera)));
                 break;
-            case 5 :    mMap.addMarker(new MarkerOptions().position(gimnasio).title(nombre).icon(BitmapDescriptorFactory.fromResource(R.drawable.uparque)));
+            case 5 :    mMap.addMarker(new MarkerOptions().position(posicion).title(nombre).snippet(""+posicion).icon(BitmapDescriptorFactory.fromResource(R.drawable.uparque)));
                 break;
             default: break;
         }
@@ -109,7 +203,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-
+    public void MensajeOK(String msg){
+        View v1 = getWindow().getDecorView().getRootView();
+        AlertDialog.Builder builder1 = new AlertDialog.Builder( v1.getContext());
+        builder1.setMessage(msg);
+        builder1.setCancelable(true);
+        builder1.setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {} });
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+        ;};
 
     private void cargarUbicaciones(){
 
@@ -131,7 +235,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (marcador != null) marcador.remove();
         marcador = mMap.addMarker(new MarkerOptions()
                 .position(coordenadas)
-                .title("Posición")
+                .title("Mi posición")
                 .icon(BitmapDescriptorFactory.fromResource(R.mipmap.pos)));
         mMap.animateCamera(miUbicacion);
     }
