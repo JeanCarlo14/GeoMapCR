@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.usuario.geomapcr.MenuPrincipal"
+    tools:showIn="@layout/app_bar_menu_principal">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo"
+    tools:layout_editor_absoluteY="8dp"
+    tools:layout_editor_absoluteX="8dp">
+
+    <Button
+        android:text="Ayuda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnMapa"
+        android:layout_alignRight="@+id/btnMapa"
+        android:layout_alignEnd="@+id/btnMapa"
+        android:layout_marginTop="30dp"
+        android:id="@+id/btnAyuda"
+        android:background="?attr/colorAccent"
+        android:layout_alignLeft="@+id/btnMapa"
+        android:layout_alignStart="@+id/btnMapa" />
+
+    <Button
+        android:text="Relax"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:id="@+id/btnRelax"
+        android:background="@android:color/holo_red_dark"
+        android:layout_below="@+id/btnTest"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@+id/btnAyuda"
+        android:layout_toLeftOf="@+id/btnJugar"
+        android:layout_toStartOf="@+id/btnJugar" />
+
+    <Button
+        android:text="Mapa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnMapa"
+        android:background="@android:color/holo_purple"
+        android:layout_marginRight="13dp"
+        android:layout_marginEnd="13dp"
+        android:layout_alignBaseline="@+id/btnTest"
+        android:layout_alignBottom="@+id/btnTest"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/btnJugar"
+        android:layout_toEndOf="@+id/btnJugar" />
+
+    <Button
+        android:text="Jugar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnJugar"
+        android:background="?android:attr/colorMultiSelectHighlight"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="49dp"
+        android:id="@+id/btnTest"
+        android:background="@android:color/holo_blue_bright"
+        android:layout_below="@+id/btnJugar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/btnRelax"
+        android:layout_alignEnd="@+id/btnRelax" />
+
+</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

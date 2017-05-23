@@ -77,7 +77,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Button Mi_button = (Button) findViewById(R.id.button3);
         registerForContextMenu(Mi_button);
 
+
+
     }
+
+
 
     public void OnclickDelButton(int ref) {
 
@@ -152,8 +156,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void Mensaje(String msg){
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();};
-
-
 
 
     @Override
