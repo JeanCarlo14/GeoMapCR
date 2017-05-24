@@ -19,7 +19,6 @@ import android.support.v7.app.AlertDialog;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -41,15 +40,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.usuario.geomapcr.R.id.fab3;
-import static com.example.usuario.geomapcr.R.id.fab4;
-
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private Marker marcador;
-    double lat = 0.0;
-    double lng = 0.0;
+    double lat = 9.971157;
+    double lng = -84.129138;
     private static String url_tipo_ubicacion = "http://geomapcr.atwebpages.com/get_tipo_ubicaciones.php";
     private static String url_all_ubicacion = "http://geomapcr.atwebpages.com/get_all_ubicaciones.php";
     // Creating JSON Parser object
@@ -72,99 +68,61 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
         new LoadAllProducts().execute(); // ver en que momento usar
 
-        OnclickDelButton(R.id.button1);
-        OnclickDelButton(R.id.button2);
-        OnclickDelButton(R.id.button3);
-        OnclickDelButton(R.id.button4);
-        /*OnclickDelButton(R.id.button5);*/
+        FloatingActionButton fab4 = (FloatingActionButton) findViewById(R.id.fab4);
+        registerForContextMenu(fab4);
 
-        FloatingActionButton Mi_button = (FloatingActionButton) findViewById(R.id.fab4); // REVISAR
-        registerForContextMenu(Mi_button);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // acercar
-                mMap.animateCamera(CameraUpdateFactory.zoomIn());
-            }
-        });
-
-        FloatingActionButton fab1 = (FloatingActionButton) findViewById(R.id.fab2);
-        fab1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // alejar
-                mMap.animateCamera(CameraUpdateFactory.zoomOut());
-            }
-        });
-
-        FloatingActionButton fab2 = (FloatingActionButton) findViewById(fab3);
-        fab2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                miUbicacion();
-            }
-        });
-
-        FloatingActionButton fab3 = (FloatingActionButton) findViewById(fab4);
-        fab3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openContextMenu(findViewById(R.id.fab4));
-            }
-        });
-
-    }
+        OnclickDelFloatingActionButton(R.id.fab);
+        OnclickDelFloatingActionButton(R.id.fab2);
+        OnclickDelFloatingActionButton(R.id.fab3);
+        OnclickDelFloatingActionButton(R.id.fab4);
 
 
 
-    public void OnclickDelButton(int ref) {
+    } // FIN ONCREATE
+
+
+
+    public void OnclickDelFloatingActionButton(int ref) {
 
         // Ejemplo  OnclickDelButton(R.id.MiButton);
         // 1 Doy referencia al Button
         View view =findViewById(ref);
-        Button miButton = (Button) view;
+        FloatingActionButton miButton = (FloatingActionButton) view;
         //  final String msg = miButton.getText().toString();
         // 2.  Programar el evento onclick
         miButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                // if(msg.equals("Texto")){Mensaje("Texto en el botón ");};
                 switch (v.getId()) {
 
-                    case R.id.button1:
+                    case R.id.fab:
                         // acercar
                         mMap.animateCamera(CameraUpdateFactory.zoomIn());
                         break;
 
-                    case R.id.button2:
+                    case R.id.fab2:
                         // alejar
                         mMap.animateCamera(CameraUpdateFactory.zoomOut());
                         break;
 
-                    case R.id.button3:
-                        openContextMenu(findViewById(R.id.button3));
-                        break;
-
-                    case R.id.button4:
+                    case R.id.fab3:
                         miUbicacion();
                         break;
-/*
-                    case R.id.button5:
-                        Mensaje("Implementar Button5");
 
-                        break;*/
+                    case R.id.fab4:
+                        openContextMenu(findViewById(R.id.fab4));
+                        break;
+
                     default:break; }// fin de casos
             }// fin del onclick
         });
-    }// fin de OnclickDelButton
+    }// fin de OnclickDelFloatingActionButton
 
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        if(v.getId()==R.id.button3) {
+        if(v.getId()==R.id.fab4) {
             menu.setHeaderTitle("Tipos de mapa");
             menu.add(0, 1, 0, "Satelital");
             menu.add(0, 2, 0, "Terreno");
@@ -198,22 +156,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         miUbicacion();
-        // Add a marker in Sydney and move the camera
-        /*LatLng sydney = new LatLng(9.9961661, -84.1196966999999);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-
-        LatLng sydney3 = new LatLng(10.0009657, -84.11567230000000);
-        mMap.addMarker(new MarkerOptions().position(sydney3).title("p"));
-
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
-        /*
-        *  gim(int lat, int lon){
-        *      LatLng sydney3 = new LatLng(lat, lon);
-        mMap.addMarker(new MarkerOptions().position(sydney3).title("p"));
-        *
-        *  }
-        *
-        * */
 
     }
 
@@ -311,7 +253,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void miUbicacion() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
             return;
         }
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
