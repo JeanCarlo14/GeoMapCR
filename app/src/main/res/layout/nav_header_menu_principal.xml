@@ -19,6 +19,7 @@
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="Usuario"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="@color/common_google_signin_btn_text_dark_focused" />
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="24sp" />
 
 </LinearLayout>
