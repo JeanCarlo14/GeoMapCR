@@ -12,6 +12,7 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
@@ -39,6 +40,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.usuario.geomapcr.R.id.fab3;
+import static com.example.usuario.geomapcr.R.id.fab4;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -74,10 +78,42 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         OnclickDelButton(R.id.button4);
         /*OnclickDelButton(R.id.button5);*/
 
-        Button Mi_button = (Button) findViewById(R.id.button3);
+        FloatingActionButton Mi_button = (FloatingActionButton) findViewById(R.id.fab4); // REVISAR
         registerForContextMenu(Mi_button);
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // acercar
+                mMap.animateCamera(CameraUpdateFactory.zoomIn());
+            }
+        });
 
+        FloatingActionButton fab1 = (FloatingActionButton) findViewById(R.id.fab2);
+        fab1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // alejar
+                mMap.animateCamera(CameraUpdateFactory.zoomOut());
+            }
+        });
+
+        FloatingActionButton fab2 = (FloatingActionButton) findViewById(fab3);
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                miUbicacion();
+            }
+        });
+
+        FloatingActionButton fab3 = (FloatingActionButton) findViewById(fab4);
+        fab3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openContextMenu(findViewById(R.id.fab4));
+            }
+        });
 
     }
 
