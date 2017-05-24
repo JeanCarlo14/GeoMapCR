@@ -8,15 +8,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class Resultados extends AppCompatActivity {
-private int puntos1=0;
-private int puntos2=0;
-private int puntosTotal=0;
+    private int puntos1=0;
+    private int puntos2=0;
+    private float puntosTotal=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultados);
 
-        Intent callingIntent = getIntent();
+         Intent callingIntent = getIntent();
         puntos1 = callingIntent.getIntExtra("puntosA", 1);
         puntos2 = callingIntent.getIntExtra("puntosB", 1);
 
@@ -28,7 +28,7 @@ private int puntosTotal=0;
         if(puntos1!=0)
             puntosTotal=(puntos1*100)/(puntos1+puntos2);
 
-       nota.setText(String.valueOf(puntosTotal));
+        nota.setText(String.valueOf(puntosTotal));
 
         OnclickDelButton(R.id.again);
         OnclickDelButton(R.id.inicio);

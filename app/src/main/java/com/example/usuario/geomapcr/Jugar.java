@@ -1,4 +1,5 @@
 package com.example.usuario.geomapcr;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -67,6 +68,8 @@ public class Jugar extends AppCompatActivity {
         new LoadAllProducts().execute(); // ver en que momento usar
     }
 
+
+
     MediaPlayer misonido;
 
     public void ReproducirAudio(){
@@ -102,7 +105,6 @@ public class Jugar extends AppCompatActivity {
 
                     case btn_siguiente:
                         intentos++;
-
                         if(cant>preg_rand.length-1) {
 
                             Handler handler = new Handler();
@@ -116,7 +118,7 @@ public class Jugar extends AppCompatActivity {
                                     intento1.putExtra("puntosB", puntosB);
                                     startActivity(intento1);
                                 }
-                            }, 2000);
+                            }, 2500);
 
 
 
