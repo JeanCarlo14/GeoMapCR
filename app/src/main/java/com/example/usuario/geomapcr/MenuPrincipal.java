@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.os.Build.VERSION_CODES.M;
+import static com.example.usuario.geomapcr.R.id.nav_volumen;
 
 public class MenuPrincipal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -48,7 +49,6 @@ public class MenuPrincipal extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         Mensaje("Bienvenidos a GeoMapCR");
-        ReproducirAudio();
 
         OnclickDelButton(R.id.btnTest);
         OnclickDelButton(R.id.btnMapa);
@@ -67,6 +67,10 @@ public class MenuPrincipal extends AppCompatActivity
         TextView txt_correo_Navi = (TextView) hView.findViewById(R.id.txt_nick);
         txt_correo_Navi.setText(pref.getString("nombre","No logueado"));
 
+        SharedPreferences prefSonido = getSharedPreferences("PreGeoMapSonido", MODE_PRIVATE);
+         cs = prefSonido.getInt("sonido",0);
+        ReproducirAudio();
+        //View hView2 = navigationView.get();
  /*       TextView txt_nombreCompleto= (TextView) hView.findViewById(R.id.txt_nombre_completo);
         txt_nombreCompleto.setText(pref.getString("nombre","Sin Nombre")+" "+pref.getString("apellidos","Sin Apellidos"));
 */
@@ -106,27 +110,34 @@ public class MenuPrincipal extends AppCompatActivity
         } else if (id == R.id.nav_send) {
 
         }
-        else if (id == R.id.nav_volumen) {
-
-
-            if(cs==0){
-            item.setIcon(R.drawable.apagado);
-            PararReproducirAudio();
-            cs++;}
-            else{
-                item.setIcon(R.drawable.volumen);
-                  ReproducirAudio();
-                cs--;
-
-            }
-
-
+        else if (id == nav_volumen) {
+            sonarSINO(item);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private void sonarSINO(MenuItem item){
+        if(cs==0){
+            item.setIcon(R.drawable.apagado);
+            PararReproducirAudio();
+            cs=1;}
+        else{
+            item.setIcon(R.drawable.volumen);
+            cs=0;
+            ReproducirAudio();
+        }
+        guardarPrefSonido(cs);
+    }
+
+    private void guardarPrefSonido(int tipo){
+            SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("PreGeoMapSonido", MODE_PRIVATE).edit();
+            editor.putInt("sonido", cs);
+            editor.commit();
+    }
+
 
     public void DemeTexto(View view){
         // Uso:
@@ -204,8 +215,10 @@ public class MenuPrincipal extends AppCompatActivity
     }*/
 
     public void ReproducirAudio(){
-        mp= MediaPlayer.create(this, R.raw.uno);
-        mp.start();
+        if(cs==0) {
+            mp = MediaPlayer.create(this, R.raw.uno);
+            mp.start();
+        }
 
     }
 
