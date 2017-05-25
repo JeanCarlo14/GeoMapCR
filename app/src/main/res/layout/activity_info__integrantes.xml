@@ -6,20 +6,24 @@
     android:layout_height="match_parent"
     tools:context="com.example.usuario.geomapcr.Info_Integrantes">
 
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Integrantes"
-        android:textSize="23dp"
-        tools:layout_editor_absoluteX="134dp"
-        tools:layout_editor_absoluteY="48dp" />
 
     <RelativeLayout
-        android:layout_width="366dp"
-        android:layout_height="414dp"
-        tools:layout_editor_absoluteX="9dp"
-        tools:layout_editor_absoluteY="48dp">
+        android:layout_width="368dp"
+        android:layout_height="495dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="14dp">
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="66dp"
+            android:text="Integrantes"
+            android:textSize="23dp"
+            tools:layout_editor_absoluteX="134dp"
+            tools:layout_editor_absoluteY="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
 
         <TextView
             android:id="@+id/textView11"
@@ -38,10 +42,10 @@
             android:id="@+id/txt_nombre1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView4"
-            android:layout_marginTop="44dp"
-            android:layout_toEndOf="@+id/imageView5"
-            android:layout_toRightOf="@+id/imageView5"
+            android:layout_below="@+id/textView10"
+            android:layout_marginTop="39dp"
+            android:layout_toEndOf="@+id/imageView8"
+            android:layout_toRightOf="@+id/imageView8"
             android:text="Alexandra Aguilar Najera   304780037"
             android:textSize="18sp"
             tools:layout_editor_absoluteX="50dp"
