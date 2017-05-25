@@ -311,10 +311,7 @@ public class Jugar extends AppCompatActivity {
 
     public void cargarDatos(){
         try {
-           /* Mensaje2("LENGTH Preguntas"+preguntas.length());
-            Mensaje2("LENGTH PREGUN_RAND"+preg_rand.length);
-            Mensaje2("NUM PREGUNTA   "+preg_rand[con]);
-             Mensaje2("CON "+con);*/
+
             JSONObject c = preguntas.getJSONObject(preg_rand[con]);
 
             TextView Mi_textview = (TextView) findViewById(R.id.txt_pregunta);
