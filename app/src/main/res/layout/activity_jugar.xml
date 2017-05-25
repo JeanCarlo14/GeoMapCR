@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/common_google_signin_btn_text_dark_disabled"
     tools:context="com.example.usuario.geomapcr.Jugar">
 
     <RelativeLayout
@@ -37,14 +38,12 @@
             <Button
                 android:id="@+id/btn_siguiente"
                 style="@style/Widget.AppCompat.Button.Small"
-                android:layout_width="150dp"
+                android:layout_width="200dp"
                 android:layout_height="75dp"
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentStart="true"
-                android:background="@android:color/holo_blue_bright"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/borde_redondo"
+                android:backgroundTint="@android:color/holo_blue_bright"
                 android:text="Siguiente" />
 
             <Spinner
@@ -61,17 +60,19 @@
             android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="25dp"
             tools:layout_width="match_parent">
 
             <ImageView
                 android:id="@+id/img_pregunta"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_pregunta"
+                android:layout_width="350dp"
+                android:layout_height="265dp"
+                android:layout_below="@+id/gri_1"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="37dp"
                 android:adjustViewBounds="true"
                 android:maxHeight="250dp"
                 android:maxWidth="275dp"
@@ -79,15 +80,28 @@
                 android:minWidth="275dp"
                 app:srcCompat="@drawable/mapa" />
 
-            <TextView
-                android:id="@+id/txt_pregunta"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+
+            <GridLayout
+                android:id="@+id/gri_1"
+                android:layout_width="350dp"
+                android:layout_height="75dp"
+                android:layout_alignLeft="@+id/img_pregunta"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="23dp"
-                android:text="TextView"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+                android:layout_alignStart="@+id/img_pregunta">
+
+                <TextView
+                    android:id="@+id/txt_pregunta"
+                    android:layout_width="339dp"
+                    android:layout_height="63dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/fondo_pregunta"
+                    android:text="TextView"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+
+            </GridLayout>
 
         </RelativeLayout>
     </RelativeLayout>

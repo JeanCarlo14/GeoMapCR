@@ -29,6 +29,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.co.senab.photoview.PhotoViewAttacher;
+
 import static com.example.usuario.geomapcr.R.id.btn_siguiente;
 
 public class Jugar extends AppCompatActivity {
@@ -336,7 +338,8 @@ public class Jugar extends AppCompatActivity {
     public void cambioImagen(String img) {
 
         ImageView midib = (ImageView) findViewById(R.id.img_pregunta);
-
+        PhotoViewAttacher photoView = new PhotoViewAttacher(midib);
+        photoView.update();
         switch (img) {
             case "uno.png":
                 midib.setImageResource(R.drawable.uno);
