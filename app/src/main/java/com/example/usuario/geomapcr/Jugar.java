@@ -1,4 +1,5 @@
 package com.example.usuario.geomapcr;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -27,6 +28,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import uk.co.senab.photoview.PhotoViewAttacher;
 
 import static com.example.usuario.geomapcr.R.id.btn_siguiente;
 
@@ -67,6 +70,8 @@ public class Jugar extends AppCompatActivity {
         new LoadAllProducts().execute(); // ver en que momento usar
     }
 
+
+
     MediaPlayer misonido;
 
     public void ReproducirAudio(){
@@ -102,7 +107,6 @@ public class Jugar extends AppCompatActivity {
 
                     case btn_siguiente:
                         intentos++;
-
                         if(cant>preg_rand.length-1) {
 
                             Handler handler = new Handler();
@@ -116,7 +120,7 @@ public class Jugar extends AppCompatActivity {
                                     intento1.putExtra("puntosB", puntosB);
                                     startActivity(intento1);
                                 }
-                            }, 2000);
+                            }, 2500);
 
 
 
@@ -334,7 +338,8 @@ public class Jugar extends AppCompatActivity {
     public void cambioImagen(String img) {
 
         ImageView midib = (ImageView) findViewById(R.id.img_pregunta);
-
+        PhotoViewAttacher photoView = new PhotoViewAttacher(midib);
+        photoView.update();
         switch (img) {
             case "uno.png":
                 midib.setImageResource(R.drawable.uno);

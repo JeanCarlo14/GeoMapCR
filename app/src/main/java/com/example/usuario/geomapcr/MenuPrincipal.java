@@ -29,6 +29,8 @@ public class MenuPrincipal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final int REQUEST_PERMISSION = 0; // Id para los permisos
     static EditText texto;
+    private int cs=0;
+    public MediaPlayer mp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +49,7 @@ public class MenuPrincipal extends AppCompatActivity
 
         Mensaje("Bienvenidos a GeoMapCR");
         ReproducirAudio();
+
         OnclickDelButton(R.id.btnTest);
         OnclickDelButton(R.id.btnMapa);
         OnclickDelButton(R.id.btnRelax);
@@ -69,6 +72,8 @@ public class MenuPrincipal extends AppCompatActivity
 */
 
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -101,12 +106,27 @@ public class MenuPrincipal extends AppCompatActivity
         } else if (id == R.id.nav_send) {
 
         }
+        else if (id == R.id.nav_volumen) {
+
+
+            if(cs==0){
+            item.setIcon(R.drawable.apagado);
+            PararReproducirAudio();
+            cs++;}
+            else{
+                item.setIcon(R.drawable.volumen);
+                  ReproducirAudio();
+                cs--;
+
+            }
+
+
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 
     public void DemeTexto(View view){
         // Uso:
@@ -155,7 +175,6 @@ public class MenuPrincipal extends AppCompatActivity
     }
 
 
-    MediaPlayer misonido;
 
 
     private void populateAutoComplete() {
@@ -185,13 +204,13 @@ public class MenuPrincipal extends AppCompatActivity
     }*/
 
     public void ReproducirAudio(){
-        misonido = MediaPlayer.create(this, R.raw.uno);
-        misonido.start();
+        mp= MediaPlayer.create(this, R.raw.uno);
+        mp.start();
 
     }
 
     public void PararReproducirAudio(){
-        misonido.stop();
+        mp.stop();
 
     }
 
@@ -210,6 +229,7 @@ public class MenuPrincipal extends AppCompatActivity
                 // if(msg.equals("Texto")){Mensaje("Texto en el botón ");};
                 switch (v.getId()) {
                     case R.id.btnJugar:
+
                         openContextMenu(findViewById(R.id.btnJugar));
                         break;
 
@@ -231,6 +251,7 @@ public class MenuPrincipal extends AppCompatActivity
 
                     case R.id.btnAyuda:
                         Mensaje("Ayuda");
+
 
                         Intent intento2 = new Intent(getApplicationContext(), Ayuda.class);
                         startActivity(intento2);
@@ -352,17 +373,20 @@ public class MenuPrincipal extends AppCompatActivity
     @Override
     protected void onStart(){
         super.onStart();
-        ReproducirAudio();
+       // ReproducirAudio();
         // Mensaje2("Pase por OnStart");
     };
     @Override
     protected void onRestart(){
         super.onRestart();
+        if(cs==0)
+        ReproducirAudio();
         //  Mensaje2("Pase por onRestart");
     };
     @Override
     protected void onResume(){
         super.onResume();
+        //ReproducirAudio();
         // Mensaje2("Pase por onResume");
     };
     @Override
@@ -374,6 +398,8 @@ public class MenuPrincipal extends AppCompatActivity
     @Override
     protected void onStop(){
         super.onStop();
+        PararReproducirAudio();
+
     };
     //estoy tratando de que se haga un cambio en el git hub
 }//fin
