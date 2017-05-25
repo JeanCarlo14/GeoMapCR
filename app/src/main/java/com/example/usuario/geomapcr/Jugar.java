@@ -319,7 +319,7 @@ public class Jugar extends AppCompatActivity {
 
             TextView Mi_textview = (TextView) findViewById(R.id.txt_pregunta);
 
-            Mi_textview.setText(c.getString("pregunta") + "");
+            Mi_textview.setText((con+1)+". "+c.getString("pregunta") + "");
 
             cambioImagen(c.getString("imagen"));
 
