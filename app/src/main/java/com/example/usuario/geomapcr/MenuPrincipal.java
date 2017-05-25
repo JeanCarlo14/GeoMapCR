@@ -67,10 +67,9 @@ public class MenuPrincipal extends AppCompatActivity
         SharedPreferences pref = getSharedPreferences("PreGeoMap", MODE_PRIVATE);
 
         TextView txt_correo_Navi = (TextView) hView.findViewById(R.id.txt_nick);
-        txt_correo_Navi.setText(pref.getString("nombre","No logueado"));
+        txt_correo_Navi.setText(pref.getString("nombre","Usuario"));
 
-        SharedPreferences prefSonido = getSharedPreferences("PreGeoMapSonido", MODE_PRIVATE);
-         cs = prefSonido.getInt("sonido",0);
+         cs = pref.getInt("sonido",0);
         ReproducirAudio();
 
         //View hView2 = navigationView.get();
@@ -137,7 +136,7 @@ public class MenuPrincipal extends AppCompatActivity
     }
 
     private void guardarPrefSonido(int tipo){
-            SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("PreGeoMapSonido", MODE_PRIVATE).edit();
+            SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("PreGeoMap", MODE_PRIVATE).edit();
             editor.putInt("sonido", cs);
             editor.commit();
     }
@@ -186,7 +185,7 @@ public class MenuPrincipal extends AppCompatActivity
         View hView = navigationView.getHeaderView(0);
         SharedPreferences pref = getSharedPreferences("PreGeoMap", MODE_PRIVATE);
         TextView txt_correo_Navi = (TextView) hView.findViewById(R.id.txt_nick);
-        txt_correo_Navi.setText(pref.getString("nombre","No logueado"));
+        txt_correo_Navi.setText(pref.getString("nombre","Usuario"));
     }
 
 
@@ -268,7 +267,7 @@ public class MenuPrincipal extends AppCompatActivity
                         break;
 
                     case R.id.btnAyuda:
-                        Intent intento2 = new Intent(getApplicationContext(), Ayuda.class);
+                        Intent intento2 = new Intent(getApplicationContext(), Actividad_Ayuda.class);
                         startActivity(intento2);
 
                         break;
