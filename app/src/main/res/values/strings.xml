@@ -7,4 +7,32 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="title_activity_actividad__ayuda">Ayuda</string>
+    <string name="large_text">
+        "Tematica del juego GeoMapCR.\n\n"
+
+        "El juego GeoMapCR, consta de localizar en el mapa de Costa Rica algunas partes de la geografía "
+        "de nuestro país; las cuales estan divididas en categorias como lo son las llanuras, cordilleras, "
+        "ríos, volcanes y Parques Nacionales.\n\n"
+
+        "Pantallas del Juego.\n\n"
+
+        "Menu Principal.\n"
+        "El juego contiene un menu principal, el cual nos permite realizar varias actividades dependiendo del "
+        "botón que se presiona.\n\n"
+
+        "Jugar \n"
+        "Para empezar a jugar, se debe presionar el boton jugar, luego seleccionar una de las categoría antes "
+        "mencionadas.\n\n"
+
+        "Test \n"
+        "El botón test nos llevara a un Test con algunas preguntas sobre cualquier categoría. \n\n"
+
+        "Mapa \n"
+        "Al presionar el botón mapa, este nos enseñara el mapa de Costa Rica. \n\n"
+
+        "Relax \n"
+        "El botón relax nos permite responder las preguntas sin ningun tipo de prueba. \n\n"
+
+    </string>
 </resources>

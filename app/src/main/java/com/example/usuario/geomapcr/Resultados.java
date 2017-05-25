@@ -1,6 +1,7 @@
 package com.example.usuario.geomapcr;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
@@ -20,7 +21,9 @@ public class Resultados extends AppCompatActivity {
          Intent callingIntent = getIntent();
         puntos1 = callingIntent.getIntExtra("puntosA", 1);
         puntos2 = callingIntent.getIntExtra("puntosB", 1);
-
+        SharedPreferences pref = getSharedPreferences("PreGeoMap", MODE_PRIVATE);
+        TextView nombre = (TextView) findViewById(R.id.txt_Nombre);
+        nombre.setText(pref.getString("nombre","Usuario")); // REVISAR
         TextView buenas = (TextView) findViewById(R.id.textView5);
         TextView malas = (TextView) findViewById(R.id.textView6);
         TextView nota = (TextView) findViewById(R.id.textView3);
