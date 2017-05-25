@@ -134,9 +134,7 @@ public class Jugar extends AppCompatActivity {
                         }
                         else {
                             esIncorrecta();
-
                             puntosB++;
-
                         }
 
 
@@ -144,7 +142,6 @@ public class Jugar extends AppCompatActivity {
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-
 
                                 Button Mi_button = (Button) findViewById(R.id.btn_siguiente);
                                 Mi_button.setEnabled(true);
@@ -168,7 +165,7 @@ public class Jugar extends AppCompatActivity {
                             cargarDatos();
 
                         }*/
-                        if(con == preg_rand.length-1){
+                        if(con+1 == preg_rand.length-1){
                             //btn_atras_Siguiente(true,false);
                             if(cant+1>preg_rand.length-1)
                                 Mi_button.setText("Finalizar");
