@@ -55,7 +55,7 @@ public class Resultados extends AppCompatActivity {
                         break;
 
                     case R.id.inicio:
-                        Intent intento = new Intent(getApplicationContext(), MainMenu.class);
+                        Intent intento = new Intent(getApplicationContext(), MenuPrincipal.class);
                         startActivity(intento);
                         break;
 
