@@ -59,9 +59,8 @@ public class Resultados extends AppCompatActivity {
                         startActivity(intento);
                         break;
 
-
-
-                    default:break; }// fin de casos
+                    default: break;
+                }// fin de casos
             }// fin del onclick
         });
     }// fin de OnclickDelButton
