@@ -3,6 +3,7 @@ package com.example.usuario.geomapcr;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -35,6 +36,17 @@ public class Resultados extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) { // Regresar boton atras
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+  // Esto es lo que hace mi botón de atras
+            Intent intento = new Intent(getApplicationContext(), MenuPrincipal.class);
+            startActivity(intento);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     public void OnclickDelButton(int ref) {

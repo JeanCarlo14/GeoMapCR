@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -493,6 +494,17 @@ public class Jugar extends AppCompatActivity {
         // Mensaje2("Pase por onStop");
     };
     //estoy tratado e
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) { // Regresar boton atras
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            // Esto es lo que hace mi botón de atras
+            Intent intento = new Intent(getApplicationContext(), MenuPrincipal.class);
+            startActivity(intento);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
 
 
