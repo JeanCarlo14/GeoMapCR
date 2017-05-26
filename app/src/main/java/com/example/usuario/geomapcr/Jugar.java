@@ -105,7 +105,6 @@ public class Jugar extends AppCompatActivity {
         miButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                // if(msg.equals("Texto")){Mensaje("Texto en el botón ");};
                 switch (v.getId()) {
 
                     case btn_siguiente:
@@ -121,8 +120,6 @@ public class Jugar extends AppCompatActivity {
 
 
     private void funcionalidad_Btn_Siguiente(){
-       // Mensaje(preg_rand.length+" "+cant +" "+ con);
-        Mensaje(preg_rand.length+" CANT "+cant);
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -163,19 +160,6 @@ public class Jugar extends AppCompatActivity {
 
         }
         sumarRestarPuntos();
-
-
-
-
-   
-                      /*if(con<preguntas.length()-1) {
-                            btn_atras_Siguiente(true,true);
-                            con++;
-
-                            cargarDatos();
-
-                        }*/
-
 
 
     }
@@ -286,16 +270,9 @@ private void sumarRestarPuntos(){
                 public void run() {
 
                     if (success == 1) {
-                        // Mensaje("Entro en success");
                         llenarVectorPregInt();
                         preRandom();
                         cargarDatos();
-                        try {
-                            MensajeOK(preguntas.get(0).toString()); //QUITAR
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
 
                         // Colocar si trabajo algo
                     } else {
@@ -333,12 +310,10 @@ private void sumarRestarPuntos(){
 
     private int preRandom(){
         int rnd=  0;
-        //Mensaje2("Valor random "+rnd);
         while(existe_numPre(rnd)){
             rnd= (int) (Math.random() * preguntas.length());
         }
         preg_rand[pos]=rnd;
-        MensajeOK(rnd+"");
         pos++;
         return rnd;
     }
@@ -476,15 +451,12 @@ private void sumarRestarPuntos(){
 
     public void esCorrecta(){
 
-        //  Mensaje("correctaaaaaaa");
         Toast toast3 = new Toast(getApplicationContext());
 
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.cust_toast_layout,
                 (ViewGroup) findViewById(R.id.lytLayout));
 
-        // TextView txtMsg = (TextView)layout.findViewById(R.id.txtMensaje);
-        //  txtMsg.setText("Toast Personalizado");
         toast3.setGravity(Gravity.CENTER | 0 , 0, 0);
         toast3.setDuration(Toast.LENGTH_SHORT);
         toast3.setView(layout);
@@ -493,7 +465,6 @@ private void sumarRestarPuntos(){
 
     public void esIncorrecta(){
 
-        //  Mensaje("correctaaaaaaa");
         Toast toast3 = new Toast(getApplicationContext());
 
         LayoutInflater inflater = getLayoutInflater();
@@ -501,8 +472,6 @@ private void sumarRestarPuntos(){
         View layout = inflater.inflate(R.layout.icust_toast_layout,
                 (ViewGroup) findViewById(R.id.lytLayout));
 
-        // TextView txtMsg = (TextView)layout.findViewById(R.id.txtMensaje);
-        //  txtMsg.setText("Toast Personalizado");
         toast3.setGravity(Gravity.CENTER | 0 , 0, 0);
         toast3.setDuration(Toast.LENGTH_SHORT);
         toast3.setView(layout);
@@ -514,30 +483,24 @@ private void sumarRestarPuntos(){
     @Override
     protected void onStart(){
         super.onStart();
-        // Mensaje2("Pase por OnStart");
     };
     @Override
     protected void onRestart(){
         super.onRestart();
-        //  Mensaje2("Pase por onRestart");
     };
     @Override
     protected void onResume(){
         super.onResume();
-        // Mensaje2("Pase por onResume");
     };
     @Override
     protected void onPause(){
         super.onPause();
-        //  Mensaje2("Pase por onPause");
         PararReproducirAudio();
     };
     @Override
     protected void onStop(){
         super.onStop();
-        // Mensaje2("Pase por onStop");
     };
-    //estoy tratado e
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) { // Regresar boton atras
