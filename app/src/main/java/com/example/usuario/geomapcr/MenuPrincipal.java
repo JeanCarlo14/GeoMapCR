@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.os.Build.VERSION_CODES.M;
+import static com.example.usuario.geomapcr.R.id.nav_volumen;
 
 public class MenuPrincipal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -35,6 +36,8 @@ public class MenuPrincipal extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
+        populateAutoComplete();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -48,7 +51,6 @@ public class MenuPrincipal extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         Mensaje("Bienvenidos a GeoMapCR");
-        ReproducirAudio();
 
         OnclickDelButton(R.id.btnTest);
         OnclickDelButton(R.id.btnMapa);
@@ -65,11 +67,16 @@ public class MenuPrincipal extends AppCompatActivity
         SharedPreferences pref = getSharedPreferences("PreGeoMap", MODE_PRIVATE);
 
         TextView txt_correo_Navi = (TextView) hView.findViewById(R.id.txt_nick);
-        txt_correo_Navi.setText(pref.getString("nombre","No logueado"));
+        txt_correo_Navi.setText(pref.getString("nombre","Usuario"));
 
+         cs = pref.getInt("sonido",0);
+        ReproducirAudio();
+
+        //View hView2 = navigationView.get();
  /*       TextView txt_nombreCompleto= (TextView) hView.findViewById(R.id.txt_nombre_completo);
         txt_nombreCompleto.setText(pref.getString("nombre","Sin Nombre")+" "+pref.getString("apellidos","Sin Apellidos"));
 */
+
 
     }
 
@@ -93,40 +100,39 @@ public class MenuPrincipal extends AppCompatActivity
 
         if (id == R.id.nav_nombre) {
             DemeTexto(this.getCurrentFocus());
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_credenciales) {
+        }  else if (id == R.id.nav_credenciales) {
             Intent intento3 = new Intent(getApplicationContext(), Info_Integrantes.class);
             startActivity(intento3);
             PararReproducirAudio();
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
         }
-        else if (id == R.id.nav_volumen) {
-
-
-            if(cs==0){
-            item.setIcon(R.drawable.apagado);
-            PararReproducirAudio();
-            cs++;}
-            else{
-                item.setIcon(R.drawable.volumen);
-                  ReproducirAudio();
-                cs--;
-
-            }
-
-
+        else if (id == nav_volumen) {
+            sonarSINO(item);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private void sonarSINO(MenuItem item){
+        if(cs==0){
+            item.setIcon(R.drawable.apagado);
+            PararReproducirAudio();
+            cs=1;}
+        else{
+            item.setIcon(R.drawable.volumen);
+            cs=0;
+            ReproducirAudio();
+        }
+        guardarPrefSonido(cs);
+    }
+
+    private void guardarPrefSonido(int tipo){
+            SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("PreGeoMap", MODE_PRIVATE).edit();
+            editor.putInt("sonido", cs);
+            editor.commit();
+    }
+
 
     public void DemeTexto(View view){
         // Uso:
@@ -171,7 +177,7 @@ public class MenuPrincipal extends AppCompatActivity
         View hView = navigationView.getHeaderView(0);
         SharedPreferences pref = getSharedPreferences("PreGeoMap", MODE_PRIVATE);
         TextView txt_correo_Navi = (TextView) hView.findViewById(R.id.txt_nick);
-        txt_correo_Navi.setText(pref.getString("nombre","No logueado"));
+        txt_correo_Navi.setText(pref.getString("nombre","Usuario"));
     }
 
 
@@ -204,12 +210,15 @@ public class MenuPrincipal extends AppCompatActivity
     }*/
 
     public void ReproducirAudio(){
-        mp= MediaPlayer.create(this, R.raw.uno);
-        mp.start();
+        if(cs==0) {
+            mp = MediaPlayer.create(this, R.raw.uno);
+            mp.start();
+        }
 
     }
 
     public void PararReproducirAudio(){
+        if(cs==0)
         mp.stop();
 
     }
@@ -250,10 +259,7 @@ public class MenuPrincipal extends AppCompatActivity
                         break;
 
                     case R.id.btnAyuda:
-                        Mensaje("Ayuda");
-
-
-                        Intent intento2 = new Intent(getApplicationContext(), Ayuda.class);
+                        Intent intento2 = new Intent(getApplicationContext(), Actividad_Ayuda.class);
                         startActivity(intento2);
 
                         break;
@@ -291,19 +297,16 @@ public class MenuPrincipal extends AppCompatActivity
 
         switch (opcionseleccionada) {
             case R.id.item1:
-                Mensaje("Ríos");
                 intento.putExtra("tipo", 3);
                 startActivity(intento);
                 PararReproducirAudio();
                 break;
             case R.id.item2:
-                Mensaje("Cordilleras y Cerros");
                 intento.putExtra("tipo", 4);
                 startActivity(intento);
                 PararReproducirAudio();
                 break;
             case R.id.item3:
-                Mensaje("Volcanes");
                 intento.putExtra("tipo", 1);
                 startActivity(intento);
                 PararReproducirAudio();
@@ -314,7 +317,6 @@ public class MenuPrincipal extends AppCompatActivity
                 PararReproducirAudio();
                 break;
             case R.id.item5:
-                Mensaje("Parques Nacionales");
                 intento.putExtra("tipo", 5);
                 startActivity(intento);
                 PararReproducirAudio();

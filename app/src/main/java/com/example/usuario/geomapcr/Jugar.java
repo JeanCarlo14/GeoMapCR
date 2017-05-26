@@ -1,14 +1,17 @@
 package com.example.usuario.geomapcr;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,8 +45,8 @@ public class Jugar extends AppCompatActivity {
     JSONArray preguntas = null;
     private ProgressDialog pDialog;
     private int tipo = 0;
-    private int con = 0;
-    private int conta = 0;
+   // private int con = 0;
+    private int conta = 0; // Para que el spinner no se seleccione
     private String correcta="";
     private String opcion="";
     private  int cant=1;
@@ -51,7 +54,6 @@ public class Jugar extends AppCompatActivity {
     private int pos = 0;
     private int puntosA=0;
     private int puntosB=0;
-    private int intentos=0;
 
 
 
@@ -66,6 +68,7 @@ public class Jugar extends AppCompatActivity {
         tipo = callingIntent.getIntExtra("tipo", 1);
         ReproducirAudio();
         OnclickDelButton(btn_siguiente);
+
 
         new LoadAllProducts().execute(); // ver en que momento usar
     }
@@ -102,79 +105,10 @@ public class Jugar extends AppCompatActivity {
         miButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                // if(msg.equals("Texto")){Mensaje("Texto en el botón ");};
                 switch (v.getId()) {
 
                     case btn_siguiente:
-                        intentos++;
-                        if(cant>preg_rand.length-1) {
-
-                            Handler handler = new Handler();
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    //sleep....
-
-                                    Intent intento1 = new Intent(getApplicationContext(), Resultados.class);
-                                    intento1.putExtra("puntosA", puntosA);
-                                    intento1.putExtra("puntosB", puntosB);
-                                    startActivity(intento1);
-                                }
-                            }, 2500);
-
-
-
-                        }
-                        cant++;
-                        if(correcta.equals(opcion)){
-                            esCorrecta();
-
-                            puntosA++;
-                            //  esCorrecta();
-                        }
-                        else {
-                            esIncorrecta();
-
-                            puntosB++;
-
-                        }
-
-
-                        Handler handler = new Handler();
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-
-
-                                Button Mi_button = (Button) findViewById(R.id.btn_siguiente);
-                                Mi_button.setEnabled(true);
-                                if(con<preg_rand.length-1) {
-                                    con++;
-                                    if(con==pos) {
-                                        preRandom();
-                                    }
-
-                                    cargarDatos();
-
-                                }
-                            }
-                        }, 2000);
-                        Button Mi_button = (Button) findViewById(R.id.btn_siguiente);
-                        Mi_button.setEnabled(false);
-                      /*if(con<preguntas.length()-1) {
-                            btn_atras_Siguiente(true,true);
-                            con++;
-
-                            cargarDatos();
-
-                        }*/
-                        if(con == preg_rand.length-1){
-                            //btn_atras_Siguiente(true,false);
-                            if(cant+1>preg_rand.length-1)
-                                Mi_button.setText("Finalizar");
-                            else
-                                Mi_button.setText("Siguiente");
-                        }
+                       funcionalidad_Btn_Siguiente();
 
                         break;
 
@@ -185,8 +119,77 @@ public class Jugar extends AppCompatActivity {
     }// fin de OnclickDelButton
 
 
+    private void funcionalidad_Btn_Siguiente(){
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                Button Mi_button = (Button) findViewById(R.id.btn_siguiente);
+                Mi_button.setEnabled(true);
+                if(cant<=preg_rand.length) { //VER
+                    // con++;
+                    if((cant-1)==pos) {
+                        preRandom();
+                    }
+
+                    cargarDatos();
+
+                }
+            }
+        }, 2000);
+
+        cambiarNombreBoton();
+
+        if(cant>preg_rand.length) {
+             handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    //sleep....
+
+                    Intent intento1 = new Intent(getApplicationContext(), Resultados.class);
+                    intento1.putExtra("puntosA", puntosA);
+                    intento1.putExtra("puntosB", puntosB);
+                    startActivity(intento1);
+                }
+            }, 2500);
 
 
+
+        }
+        sumarRestarPuntos();
+
+
+    }
+
+    private void cambiarNombreBoton(){
+        Button Mi_button = (Button) findViewById(R.id.btn_siguiente);
+       // if((cant-1) == preg_rand.length-1){
+            //btn_atras_Siguiente(true,false);
+            if(cant >= preg_rand.length)
+                Mi_button.setText("Finalizar");
+            else
+                Mi_button.setText("Siguiente");
+        Mi_button.setEnabled(false);
+    //    }
+    }
+
+private void sumarRestarPuntos(){
+    // cant++;
+    if(correcta.equals(opcion)){
+        esCorrecta();
+
+        puntosA++;
+        //  esCorrecta();
+    }
+    else {
+        esIncorrecta();
+        puntosB++;
+    }
+
+}
     /*
          * Background Async Task to Load all product by making HTTP Request
          * */
@@ -267,11 +270,9 @@ public class Jugar extends AppCompatActivity {
                 public void run() {
 
                     if (success == 1) {
-                        // Mensaje("Entro en success");
-
+                        llenarVectorPregInt();
                         preRandom();
                         cargarDatos();
-
 
                         // Colocar si trabajo algo
                     } else {
@@ -288,11 +289,27 @@ public class Jugar extends AppCompatActivity {
     } // Fin LoadallProducts
 
 
+    private void llenarVectorPregInt(){
+        for(int i=0;i<preg_rand.length;i++){
+            preg_rand[i]=-1;
+        }
+    }
+    public void MensajeOK(String msg){
+        View v1 = getWindow().getDecorView().getRootView();
+        AlertDialog.Builder builder1 = new AlertDialog.Builder( v1.getContext());
+        builder1.setMessage(msg);
+        builder1.setCancelable(true);
+        builder1.setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {} });
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+        ;};
+
     public void Mensaje2(String msg){Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();};
 
     private int preRandom(){
-        int rnd= (int) (Math.random() * preguntas.length());
-        //Mensaje2("Valor random "+rnd);
+        int rnd=  0;
         while(existe_numPre(rnd)){
             rnd= (int) (Math.random() * preguntas.length());
         }
@@ -314,21 +331,18 @@ public class Jugar extends AppCompatActivity {
 
     public void cargarDatos(){
         try {
-           /* Mensaje2("LENGTH Preguntas"+preguntas.length());
-            Mensaje2("LENGTH PREGUN_RAND"+preg_rand.length);
-            Mensaje2("NUM PREGUNTA   "+preg_rand[con]);
-             Mensaje2("CON "+con);*/
-            JSONObject c = preguntas.getJSONObject(preg_rand[con]);
+
+            JSONObject c = preguntas.getJSONObject(preg_rand[(cant-1)]);
 
             TextView Mi_textview = (TextView) findViewById(R.id.txt_pregunta);
 
-            Mi_textview.setText(c.getString("pregunta") + "");
+            Mi_textview.setText(cant+". "+c.getString("pregunta") + "");
 
             cambioImagen(c.getString("imagen"));
 
             CargarSpinner(c.getString("opciones"));
             this.correcta=c.getString("respuesta");
-
+            cant++;
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -437,15 +451,12 @@ public class Jugar extends AppCompatActivity {
 
     public void esCorrecta(){
 
-        //  Mensaje("correctaaaaaaa");
         Toast toast3 = new Toast(getApplicationContext());
 
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.cust_toast_layout,
                 (ViewGroup) findViewById(R.id.lytLayout));
 
-        // TextView txtMsg = (TextView)layout.findViewById(R.id.txtMensaje);
-        //  txtMsg.setText("Toast Personalizado");
         toast3.setGravity(Gravity.CENTER | 0 , 0, 0);
         toast3.setDuration(Toast.LENGTH_SHORT);
         toast3.setView(layout);
@@ -454,7 +465,6 @@ public class Jugar extends AppCompatActivity {
 
     public void esIncorrecta(){
 
-        //  Mensaje("correctaaaaaaa");
         Toast toast3 = new Toast(getApplicationContext());
 
         LayoutInflater inflater = getLayoutInflater();
@@ -462,8 +472,6 @@ public class Jugar extends AppCompatActivity {
         View layout = inflater.inflate(R.layout.icust_toast_layout,
                 (ViewGroup) findViewById(R.id.lytLayout));
 
-        // TextView txtMsg = (TextView)layout.findViewById(R.id.txtMensaje);
-        //  txtMsg.setText("Toast Personalizado");
         toast3.setGravity(Gravity.CENTER | 0 , 0, 0);
         toast3.setDuration(Toast.LENGTH_SHORT);
         toast3.setView(layout);
@@ -475,30 +483,35 @@ public class Jugar extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        // Mensaje2("Pase por OnStart");
     };
     @Override
     protected void onRestart(){
         super.onRestart();
-        //  Mensaje2("Pase por onRestart");
     };
     @Override
     protected void onResume(){
         super.onResume();
-        // Mensaje2("Pase por onResume");
     };
     @Override
     protected void onPause(){
         super.onPause();
-        //  Mensaje2("Pase por onPause");
         PararReproducirAudio();
     };
     @Override
     protected void onStop(){
         super.onStop();
-        // Mensaje2("Pase por onStop");
     };
-    //estoy tratado e
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) { // Regresar boton atras
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            // Esto es lo que hace mi botón de atras
+            Intent intento = new Intent(getApplicationContext(), MenuPrincipal.class);
+            startActivity(intento);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
 
 
