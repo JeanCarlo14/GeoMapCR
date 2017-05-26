@@ -30,9 +30,9 @@ public class Resultados extends AppCompatActivity {
         buenas.setText(String.valueOf(puntos1));
         malas.setText(String.valueOf(puntos2));
         if(puntos1!=0)
-            puntosTotal=(puntos1*100)/(puntos1+puntos2);
+            puntosTotal =(float)(puntos1*100)/(puntos1+puntos2);
 
-        nota.setText(String.valueOf(puntosTotal));
+        nota.setText(String.valueOf(puntosTotal).substring(0,4));
 
         OnclickDelButton(R.id.again);
         OnclickDelButton(R.id.inicio);
