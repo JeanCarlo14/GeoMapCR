@@ -2,6 +2,7 @@ package com.example.usuario.geomapcr;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
@@ -37,6 +38,7 @@ public class Resultados extends AppCompatActivity {
         OnclickDelButton(R.id.again);
         OnclickDelButton(R.id.inicio);
 
+        sonidoPuntoTotal();
 
 
     }
@@ -79,6 +81,57 @@ public class Resultados extends AppCompatActivity {
             }// fin del onclick
         });
     }// fin de OnclickDelButton
+
+    private void sonidoPuntoTotal(){
+        if(puntosTotal>70)
+            ReproducirAudioAplausos();
+        else
+            ReproducirAudioWawa();
+    }
+
+    MediaPlayer misonido;
+
+    public void ReproducirAudioAplausos(){
+        misonido = MediaPlayer.create(this, R.raw.aplauso);
+        misonido.start();
+
+    }
+    public void ReproducirAudioWawa(){
+        misonido = MediaPlayer.create(this, R.raw.wawa);
+        misonido.start();
+
+    }
+    public void PararReproducirAudio(){
+        misonido.stop();
+
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        // Mensaje2("Pase por OnStart");
+    };
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        //  Mensaje2("Pase por onRestart");
+    };
+    @Override
+    protected void onResume(){
+        super.onResume();
+        // Mensaje2("Pase por onResume");
+    };
+    @Override
+    protected void onPause(){
+        super.onPause();
+        //  Mensaje2("Pase por onPause");
+        PararReproducirAudio();
+    };
+    @Override
+    protected void onStop(){
+        super.onStop();
+        // Mensaje2("Pase por onStop");
+    };
 
 
 }
