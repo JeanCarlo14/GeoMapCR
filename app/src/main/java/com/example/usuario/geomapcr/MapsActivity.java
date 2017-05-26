@@ -167,15 +167,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Parque Nacional   5*/
         LatLng posicion = new LatLng(lat, lon);
         switch (tipo) {
-            case 1 :    mMap.addMarker(new MarkerOptions().position(posicion).title(nombre).snippet(""+posicion).icon(BitmapDescriptorFactory.fromResource(R.drawable.volcanes)));
+            case 1 :    mMap.addMarker(new MarkerOptions().position(posicion).title(nombre).icon(BitmapDescriptorFactory.fromResource(R.drawable.volcanes)));
                 break;
-            case 2 :    mMap.addMarker(new MarkerOptions().position(posicion).title(nombre).snippet(""+posicion).icon(BitmapDescriptorFactory.fromResource(R.drawable.ullanura)));
+            case 2 :    mMap.addMarker(new MarkerOptions().position(posicion).title(nombre).icon(BitmapDescriptorFactory.fromResource(R.drawable.ullanura)));
                 break;
-            case 3 :    mMap.addMarker(new MarkerOptions().position(posicion).title(nombre).snippet(""+posicion).icon(BitmapDescriptorFactory.fromResource(R.drawable.urio)));
+            case 3 :    mMap.addMarker(new MarkerOptions().position(posicion).title(nombre).icon(BitmapDescriptorFactory.fromResource(R.drawable.urio)));
                 break;
-            case 4 :    mMap.addMarker(new MarkerOptions().position(posicion).title(nombre).snippet(""+posicion).icon(BitmapDescriptorFactory.fromResource(R.drawable.ucordillera)));
+            case 4 :    mMap.addMarker(new MarkerOptions().position(posicion).title(nombre).icon(BitmapDescriptorFactory.fromResource(R.drawable.ucordillera)));
                 break;
-            case 5 :    mMap.addMarker(new MarkerOptions().position(posicion).title(nombre).snippet(""+posicion).icon(BitmapDescriptorFactory.fromResource(R.drawable.uparque)));
+            case 5 :    mMap.addMarker(new MarkerOptions().position(posicion).title(nombre).icon(BitmapDescriptorFactory.fromResource(R.drawable.uparque)));
                 break;
             default: break;
         }

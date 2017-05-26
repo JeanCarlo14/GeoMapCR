@@ -100,18 +100,10 @@ public class MenuPrincipal extends AppCompatActivity
 
         if (id == R.id.nav_nombre) {
             DemeTexto(this.getCurrentFocus());
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_credenciales) {
+        }  else if (id == R.id.nav_credenciales) {
             Intent intento3 = new Intent(getApplicationContext(), Info_Integrantes.class);
             startActivity(intento3);
             PararReproducirAudio();
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
         }
         else if (id == nav_volumen) {
             sonarSINO(item);
