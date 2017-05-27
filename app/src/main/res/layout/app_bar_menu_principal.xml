@@ -20,7 +20,9 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_menu_principal" />
+    <include
+        layout="@layout/content_menu_principal"
+        android:layout_width="300dp" />
 
 
 </android.support.design.widget.CoordinatorLayout>
