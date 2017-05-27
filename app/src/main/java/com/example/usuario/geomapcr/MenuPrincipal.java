@@ -68,9 +68,7 @@ public class MenuPrincipal extends AppCompatActivity
 
         TextView txt_correo_Navi = (TextView) hView.findViewById(R.id.txt_nick);
         txt_correo_Navi.setText(pref.getString("nombre","Usuario"));
-
         cs = pref.getInt("sonido",0);
-
         ReproducirAudio();
 
         //View hView2 = navigationView.get();
@@ -299,56 +297,67 @@ public class MenuPrincipal extends AppCompatActivity
         switch (opcionseleccionada) {
             case R.id.item1:
                 intento.putExtra("tipo", 3);
+                intento.putExtra("sonido", cs);
                 startActivity(intento);
                 PararReproducirAudio();
                 break;
             case R.id.item2:
                 intento.putExtra("tipo", 4);
+                intento.putExtra("sonido", cs);
                 startActivity(intento);
                 PararReproducirAudio();
                 break;
             case R.id.item3:
                 intento.putExtra("tipo", 1);
+                intento.putExtra("sonido", cs);
                 startActivity(intento);
                 PararReproducirAudio();
                 break;
             case R.id.item4:
                 intento.putExtra("tipo", 2);
+                intento.putExtra("sonido", cs);
                 startActivity(intento);
                 PararReproducirAudio();
                 break;
             case R.id.item5:
                 intento.putExtra("tipo", 5);
+                intento.putExtra("sonido", cs);
                 startActivity(intento);
                 PararReproducirAudio();
                 break;
             case R.id.item6:
                 intento2.putExtra("tipo", 3);
+                intento.putExtra("sonido", cs);
                 startActivity(intento2);
                 PararReproducirAudio();
                 break;
             case R.id.item7:
                 intento2.putExtra("tipo", 4);
+                intento.putExtra("sonido", cs);
                 startActivity(intento2);
                 PararReproducirAudio();
                 break;
             case R.id.item8:
                 intento2.putExtra("tipo", 1);
+                intento.putExtra("sonido", cs);
                 startActivity(intento2);
                 PararReproducirAudio();
                 break;
             case R.id.item9:
                 intento2.putExtra("tipo", 2);
+                intento.putExtra("sonido", cs);
                 startActivity(intento2);
                 PararReproducirAudio();
                 break;
             case R.id.item10:
                 intento2.putExtra("tipo", 5);
+                intento.putExtra("sonido", cs);
                 startActivity(intento2);
                 PararReproducirAudio();
                 break;
             case R.id.item11:
                 intento2.putExtra("tipo", 7);
+                intento.putExtra("sonido", cs);
                 startActivity(intento2);
                 PararReproducirAudio();
                 break;
