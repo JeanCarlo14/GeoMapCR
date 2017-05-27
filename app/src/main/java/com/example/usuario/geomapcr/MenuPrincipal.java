@@ -68,6 +68,7 @@ public class MenuPrincipal extends AppCompatActivity
 
         TextView txt_correo_Navi = (TextView) hView.findViewById(R.id.txt_nick);
         txt_correo_Navi.setText(pref.getString("nombre","Usuario"));
+        cs = pref.getInt("sonido",0);
         ReproducirAudio();
 
         //View hView2 = navigationView.get();

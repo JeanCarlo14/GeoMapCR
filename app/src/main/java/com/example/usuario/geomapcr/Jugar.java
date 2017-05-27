@@ -69,9 +69,10 @@ public class Jugar extends AppCompatActivity {
         preguntas = new JSONArray();
         Intent callingIntent = getIntent();
         tipo = callingIntent.getIntExtra("tipo", 1);
-        ReproducirAudio();
         OnclickDelButton(btn_siguiente);
-
+        SharedPreferences pref = getSharedPreferences("PreGeoMap", MODE_PRIVATE);
+        sonido = pref.getInt("sonido",0);
+        ReproducirAudio();
 
         new LoadAllProducts().execute(); // ver en que momento usar
 
@@ -89,22 +90,26 @@ public class Jugar extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_nuevo:
-                if(sonido==0){
-                    PararReproducirAudio();
-                    item.setIcon(R.drawable.apagado);
-                sonido=1;}
-
-                else
-                {
-                    ReproducirAudio();
-                    item.setIcon(R.drawable.volumen);
-                    sonido=0;
-
-                }
+                sonarSINO(item);
                 return true;
                        default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void sonarSINO(MenuItem item){
+        if(sonido==0){
+            PararReproducirAudio();
+            item.setIcon(R.drawable.apagado);
+            sonido=1;}
+
+        else
+        {
+            sonido=0;
+            ReproducirAudio();
+            item.setIcon(R.drawable.volumen);
+        }
+        guardarPrefSonido(sonido);
     }
 
     private void guardarPrefSonido(int tipo){
@@ -118,12 +123,15 @@ public class Jugar extends AppCompatActivity {
     MediaPlayer misonido;
 
     public void ReproducirAudio(){
-        misonido = MediaPlayer.create(this, R.raw.dos);
-        misonido.start();
+        if(sonido==0) {
+            misonido = MediaPlayer.create(this, R.raw.dos);
+            misonido.start();
+        }
 
     }
 
     public void PararReproducirAudio(){
+        if(sonido==0)
         misonido.stop();
 
     }
@@ -192,6 +200,7 @@ public class Jugar extends AppCompatActivity {
                     Intent intento1 = new Intent(getApplicationContext(), Resultados.class);
                     intento1.putExtra("puntosA", puntosA);
                     intento1.putExtra("puntosB", puntosB);
+                    intento1.putExtra("tipo", tipo);
                     startActivity(intento1);
                 }
             }, 2500);

@@ -13,6 +13,7 @@ import android.widget.TextView;
 public class Resultados extends AppCompatActivity {
     private int puntos1=0;
     private int puntos2=0;
+    private int tipo = 0;
     private float puntosTotal=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,7 @@ public class Resultados extends AppCompatActivity {
          Intent callingIntent = getIntent();
         puntos1 = callingIntent.getIntExtra("puntosA", 1);
         puntos2 = callingIntent.getIntExtra("puntosB", 1);
+        tipo = callingIntent.getIntExtra("tipo", 1);
         SharedPreferences pref = getSharedPreferences("PreGeoMap", MODE_PRIVATE);
         TextView nombre = (TextView) findViewById(R.id.txt_Nombre);
         nombre.setText(pref.getString("nombre","Usuario")); // REVISAR
@@ -68,6 +70,7 @@ public class Resultados extends AppCompatActivity {
                 switch (v.getId()) {
                     case R.id.again:
                         Intent intento1 = new Intent(getApplicationContext(), Jugar.class);
+                        intento1.putExtra("tipo", tipo);
                         startActivity(intento1);
                         break;
 
