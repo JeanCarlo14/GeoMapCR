@@ -9,11 +9,11 @@
     tools:showIn="@layout/app_bar_menu_principal">
 
     <RelativeLayout
-        android:layout_width="385dp"
-        android:layout_height="519dp"
+        android:layout_width="371dp"
+        android:layout_height="596dp"
         android:background="@drawable/fondo"
-        tools:layout_editor_absoluteX="3dp"
-        tools:layout_editor_absoluteY="2dp">
+        tools:layout_editor_absoluteX="7dp"
+        tools:layout_editor_absoluteY="7dp">
 
         <Button
             android:id="@+id/btnAyuda"
