@@ -3,7 +3,6 @@ package com.example.usuario.geomapcr;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,8 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -57,7 +54,7 @@ public class Jugar extends AppCompatActivity {
     private int pos = 0;
     private int puntosA=0;
     private int puntosB=0;
-    private int sonido=0;
+
 
 
 
@@ -75,6 +72,7 @@ public class Jugar extends AppCompatActivity {
         ReproducirAudio();
 
         new LoadAllProducts().execute(); // ver en que momento usar
+
 
     }
 
@@ -116,6 +114,7 @@ public class Jugar extends AppCompatActivity {
         SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences("PreGeoMap", MODE_PRIVATE).edit();
         editor.putInt("sonido", sonido);
         editor.commit();
+
     }
 
 
@@ -212,7 +211,6 @@ public class Jugar extends AppCompatActivity {
 
 
     }
-
 
     private void cambiarNombreBoton(){
         Button Mi_button = (Button) findViewById(R.id.btn_siguiente);
