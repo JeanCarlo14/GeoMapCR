@@ -32,6 +32,19 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/link_tutorial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/fab2"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="11dp"
+        android:scaleType="centerInside"
+        app:backgroundTint="?attr/colorButtonNormal"
+        app:srcCompat="@drawable/tv" />
+
     <include layout="@layout/content_actividad__ayuda" />
 
 </android.support.design.widget.CoordinatorLayout>
